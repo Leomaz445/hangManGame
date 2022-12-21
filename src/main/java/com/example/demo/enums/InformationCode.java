@@ -6,5 +6,7 @@ public enum InformationCode {
 
     private final int value;
 
-    InformationCode(int value) { this.value = value;}
+    InformationCode(int value) {
+        this.value = value;
+    }
 }

@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.function.Consumer;
 
 public class DrawPerson {
-    private final HashMap<ErrorNumber, Consumer<GraphicsContext>> drawingMap = new HashMap<>() {{
+    private final HashMap<ErrorNumber, Consumer<GraphicsContext>> drawingMap = new HashMap<ErrorNumber, Consumer<GraphicsContext>>() {{
         put(ErrorNumber.ERROR_ONE_DRAWING_THE_FLOOR, ((gc) -> addLineToPerson(gc, getTheFloor(gc.getCanvas().getHeight(), gc.getCanvas().getWidth()))));
         put(ErrorNumber.ERROR_TWO_DRAWING_THE_POLL, ((gc) -> addLineToPerson(gc, getThePoll(gc.getCanvas().getHeight(), gc.getCanvas().getWidth()))));
         put(ErrorNumber.ERROR_THREE_DRAWING_THE_POLL_ROOF, ((gc) -> addLineToPerson(gc, getTheRoof(gc.getCanvas().getHeight(), gc.getCanvas().getWidth()))));
@@ -58,11 +58,11 @@ public class DrawPerson {
     }
 
     private CoordinatesWrapper getTheLeftHandOfPerson(double height, double width) {
-        return new CoordinatesWrapper(width - 260, height -120, width - 280, height - 90);
+        return new CoordinatesWrapper(width - 260, height - 120, width - 280, height - 90);
     }
 
     private CoordinatesWrapper getTheRightHandOfPerson(double height, double width) {
-        return new CoordinatesWrapper(width - 260, height -120, width - 240, height - 90);
+        return new CoordinatesWrapper(width - 260, height - 120, width - 240, height - 90);
     }
 
     private CoordinatesWrapper getTheLeftLegOfPerson(double height, double width) {

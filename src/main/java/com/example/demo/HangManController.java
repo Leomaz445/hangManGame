@@ -82,7 +82,7 @@ public class HangManController {
         for (int i = 0; i < ABC.length; i++) {
             btns[i] = new Button(ABC[i]);
             btns[i].setPrefSize(grid.getPrefWidth() / NUMBER_OF_BUTTONS_IN_ROW,
-                                grid.getPrefHeight() / NUMBER_OF_BUTTONS_IN_ROW);
+                    grid.getPrefHeight() / NUMBER_OF_BUTTONS_IN_ROW);
             grid.add(btns[i], i % NUMBER_OF_BUTTONS_IN_ROW, i / NUMBER_OF_BUTTONS_IN_ROW);
             btns[i].setOnAction(this::handleClickedButton);
 
@@ -95,29 +95,17 @@ public class HangManController {
 
         if (!hangMan.theLetterExistsInTheWord(button.getText())) {
             drawPersonOnCanvs.drawingSelector(ErrorNumber.values()[hangMan.getErrorNumber()], gc);
-            checkIfLostTheGame();
+            if (hangMan.checkIfLostTheGame())
+                showResultOfTheGame(YOU_LOOSE,
+                        YOU_DIDN_T_MANAGE_TO_GUESS_THE_WORD,
+                        THE_WORD_WAS + hangMan.getWordForTheGame());
         }
         textOfTheWord.setText(Arrays.toString(hangMan.getWordThatNeedToBeGuessedPattern()));
-        checkIfWonTheGame();
-
-    }
-
-    private void checkIfLostTheGame() {
-        if (hangMan.getErrorNumber() == ErrorNumber.ERROR_TEN_DRAWING_RIGHT_LEG.value) {
-            showResultOfTheGame(YOU_LOOSE,
-                    YOU_DIDN_T_MANAGE_TO_GUESS_THE_WORD,
-                    THE_WORD_WAS + hangMan.getWordForTheGame());
-        }
-    }
-
-    private void checkIfWonTheGame() {
-        if (hangMan.getNumberOfRightGuesses() == 0) {
+        if (hangMan.checkIfWonTheGame())
             showResultOfTheGame(YOU_WIN,
                     YOU_GUESSED_THE_WORD_GOOD_JOB,
                     THE_WORD_WAS + hangMan.getWordForTheGame());
-        }
     }
-
 
     private void showResultOfTheGame(String title, String header, String content) {
         informationMessagesAlert.getAlert(InformationCode.YOU_WIN_OR_LOSE, new Messages.MessagesBuilder()
@@ -127,7 +115,6 @@ public class HangManController {
                 .build());
         playAgainOrExitTheGame();
     }
-
 
     private void playAgainOrExitTheGame() {
         if (confirmationMessagesAlert.getAlert(ConfirmationCode.DO_YOU_WANT_TO_PLAY_AGAIN)) {

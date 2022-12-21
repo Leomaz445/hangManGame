@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.enums.ErrorNumber;
+
 public class HangManImpl {
     private int errorNumber;
     private int numberOfRightGuesses;
@@ -56,6 +58,20 @@ public class HangManImpl {
             return false;
         }
         return true;
+    }
+
+    public boolean checkIfLostTheGame() {
+        if (errorNumber == ErrorNumber.ERROR_TEN_DRAWING_RIGHT_LEG.value) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkIfWonTheGame() {
+        if (numberOfRightGuesses == 0) {
+            return true;
+        }
+        return false;
     }
 
 }
