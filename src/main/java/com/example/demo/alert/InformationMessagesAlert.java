@@ -4,17 +4,17 @@ import com.example.demo.Messages;
 import com.example.demo.enums.InformationCode;
 import javafx.scene.control.Alert;
 
-import java.util.Map;
+import java.util.HashMap;
 import java.util.function.Consumer;
 
 
 public class InformationMessagesAlert {
 
     private final static Alert alertInformation = new Alert(Alert.AlertType.INFORMATION);
-    private final Map<InformationCode, Consumer<Messages>> mapOfInformation = Map.of(
-            InformationCode.YOU_WIN_OR_LOSE, this::createAlert,
-            InformationCode.THANK_YOU_FOR_PLAYING, this::createAlert
-    );
+    private final HashMap<InformationCode, Consumer<Messages>> mapOfInformation = new HashMap<InformationCode, Consumer<Messages>>() {{
+        put(InformationCode.YOU_WIN_OR_LOSE, msg -> createAlert(msg));
+        put(InformationCode.THANK_YOU_FOR_PLAYING, msg -> createAlert(msg));
+    }};
 
     public void getAlert(InformationCode alertCode, Messages messages) {
         mapOfInformation.get(alertCode).accept(messages);

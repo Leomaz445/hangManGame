@@ -22,7 +22,7 @@ public class GameConstants {
     public static final String YOU_ARE_ABOUT_TO_LEAVE_THE_GAME = "You are about to leave the game";
     public static final String ARE_YOU_SURE = "Are you sure?";
     public static final String YOU_ARE_ABOUT_TO_START_A_NEW_GAME = "You are about to start a new game";
-    public static final String AFTER_WINNING_DO_YOU_WANT_TO_PLAY_AGAIN = "After Winning ,Do you want to play again?";
+    public static final String AFTER_WINNING_DO_YOU_WANT_TO_PLAY_AGAIN = "Do you want to play again?";
     public static final String DO_YOU_WANT_TO_PLAY_AGAIN_MSG = "Do you want to play again?";
     public static final Messages DO_YOU_WANT_TO_PLAY_AGAIN = new Messages.MessagesBuilder()
             .setTitle(HANG_MAN_GAME)
