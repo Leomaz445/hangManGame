@@ -14,8 +14,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-import java.util.Arrays;
-
 import static com.example.demo.constants.GameConstants.*;
 import static javafx.application.Platform.exit;
 
@@ -61,7 +59,7 @@ public class HangManController {
         Dictionary dictionary = new Dictionary();
         hangMan = new HangManImpl(dictionary);
         textOfTheWord.setFill(Color.BLACK);
-        textOfTheWord.setStyle("-fx-font: 20 arial;");
+        textOfTheWord.setStyle(FX_FONT_20_ARIAL);
         btns = new Button[ABC.length];
         buildingTheButtons();
         init();
@@ -72,9 +70,9 @@ public class HangManController {
         gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
         hangMan.initNewWordForTheGame();
         System.out.println(hangMan.getWordForTheGame());
-        textOfTheWord.setText(Arrays.toString(hangMan.getWordThatNeedToBeGuessedPattern()));
+        textOfTheWord.setText(hangMan.getWordThatNeedToBeGuessedPattern());
         for (Button btn : btns) {
-            btn.setVisible(true);
+            btn.setDisable(false);
         }
     }
 
@@ -85,35 +83,39 @@ public class HangManController {
                     grid.getPrefHeight() / NUMBER_OF_BUTTONS_IN_ROW);
             grid.add(btns[i], i % NUMBER_OF_BUTTONS_IN_ROW, i / NUMBER_OF_BUTTONS_IN_ROW);
             btns[i].setOnAction(this::handleClickedButton);
-
         }
     }
 
     private void handleClickedButton(ActionEvent event) {
         Button button = (Button) event.getSource();
-        button.setVisible(false);
+        button.setDisable(true);
 
         if (!hangMan.theLetterExistsInTheWord(button.getText())) {
             drawPersonOnCanvs.drawingSelector(ErrorNumber.values()[hangMan.getErrorNumber()], gc);
-            if (hangMan.checkIfLostTheGame())
-                showResultOfTheGame(YOU_LOOSE,
-                        YOU_DIDN_T_MANAGE_TO_GUESS_THE_WORD,
-                        THE_WORD_WAS + hangMan.getWordForTheGame());
+            didYouLoseTheGame();
         }
-        textOfTheWord.setText(Arrays.toString(hangMan.getWordThatNeedToBeGuessedPattern()));
-        if (hangMan.checkIfWonTheGame())
-            showResultOfTheGame(YOU_WIN,
-                    YOU_GUESSED_THE_WORD_GOOD_JOB,
-                    THE_WORD_WAS + hangMan.getWordForTheGame());
+        textOfTheWord.setText(hangMan.getWordThatNeedToBeGuessedPattern());
+        didYouWinTheGame();
     }
 
-    private void showResultOfTheGame(String title, String header, String content) {
-        informationMessagesAlert.getAlert(InformationCode.YOU_WIN_OR_LOSE, new Messages.MessagesBuilder()
-                .setTitle(title)
-                .setHeader(header)
-                .setContent(content)
-                .build());
-        playAgainOrExitTheGame();
+    private void didYouWinTheGame() {
+        if (hangMan.checkIfWonTheGame()) {
+            informationMessagesAlert.showResultOfTheGame(InformationCode.YOU_WIN_OR_LOSE,
+                    YOU_WIN,
+                    YOU_GUESSED_THE_WORD_GOOD_JOB,
+                    THE_WORD_WAS + hangMan.getWordForTheGame());
+            playAgainOrExitTheGame();
+        }
+    }
+
+    private void didYouLoseTheGame() {
+        if (hangMan.checkIfLostTheGame()) {
+            informationMessagesAlert.showResultOfTheGame(InformationCode.YOU_WIN_OR_LOSE,
+                    YOU_LOOSE,
+                    YOU_DIDN_T_MANAGE_TO_GUESS_THE_WORD,
+                    THE_WORD_WAS + hangMan.getWordForTheGame());
+            playAgainOrExitTheGame();
+        }
     }
 
     private void playAgainOrExitTheGame() {

@@ -2,6 +2,8 @@ package com.example.demo;
 
 import com.example.demo.enums.ErrorNumber;
 
+import java.util.Arrays;
+
 public class HangManImpl {
     private int errorNumber;
     private int numberOfRightGuesses;
@@ -36,8 +38,8 @@ public class HangManImpl {
     }
 
 
-    public String[] getWordThatNeedToBeGuessedPattern() {
-        return wordThatNeedToBeGuessedPattern;
+    public String getWordThatNeedToBeGuessedPattern() {
+        return Arrays.toString(wordThatNeedToBeGuessedPattern);
     }
 
 
@@ -61,17 +63,11 @@ public class HangManImpl {
     }
 
     public boolean checkIfLostTheGame() {
-        if (errorNumber == ErrorNumber.ERROR_TEN_DRAWING_RIGHT_LEG.value) {
-            return true;
-        }
-        return false;
+        return errorNumber == ErrorNumber.ERROR_TEN_DRAWING_RIGHT_LEG.value;
     }
 
     public boolean checkIfWonTheGame() {
-        if (numberOfRightGuesses == 0) {
-            return true;
-        }
-        return false;
+        return numberOfRightGuesses == 0;
     }
 
 }

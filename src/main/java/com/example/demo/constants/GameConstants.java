@@ -7,6 +7,7 @@ public class GameConstants {
             "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
     public static final int SCENE_WIDTH = 600;
     public static final int SCENE_HEIGHT = 400;
+    public static final String FX_FONT_20_ARIAL = "-fx-font: 20 arial;";
     public static final String HANG_MAN_GAME = "HangMan Game";
     public static final String DIDNT_FIND_THE_FILE_TO_GET_THE_WORDS_FOR_THE_GAME = "Didn't find the file to get the words for the game.";
     public static final String THEIR_WAS_AN_ERROR_TRYING_TO_READ_FROM_THE_FILE = "Their was an error trying to read from the file.";
