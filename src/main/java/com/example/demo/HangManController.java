@@ -39,14 +39,14 @@ public class HangManController {
 
 
     @FXML
-    void onClickExitGame(ActionEvent event) {
+    private void onClickExitGame(ActionEvent event) {
         if (confirmationMessagesAlert.getAlert(ConfirmationCode.DO_YOU_SURE_YOU_WANT_TO_EXIT)) {
             exit();
         }
     }
 
     @FXML
-    void onClickStartNewGame(ActionEvent event) {
+    private void onClickStartNewGame(ActionEvent event) {
         if (confirmationMessagesAlert.getAlert(ConfirmationCode.ARE_YOU_SURE_YOU_WANT_TO_START_A_NEW_GAME))
             init();
     }
