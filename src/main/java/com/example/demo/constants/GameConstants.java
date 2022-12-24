@@ -24,6 +24,9 @@ public class GameConstants {
     public static final String YOU_ARE_ABOUT_TO_START_A_NEW_GAME = "You are about to start a new game";
     public static final String AFTER_WINNING_DO_YOU_WANT_TO_PLAY_AGAIN = "Do you want to play again?";
     public static final String DO_YOU_WANT_TO_PLAY_AGAIN_MSG = "Do you want to play again?";
+    public static final String WE_SORRY_BUT_WE_CANT_START_THE_GAME = "we sorry but we cant start the game";
+    public static final String CONNECT_THE_DEVELOPER = "Connect the developer";
+    public static final String ERROR_GETTING_QUESTION = "Error getting question";
     public static final Messages DO_YOU_WANT_TO_PLAY_AGAIN = new Messages.MessagesBuilder()
             .setTitle(HANG_MAN_GAME)
             .setHeader(AFTER_WINNING_DO_YOU_WANT_TO_PLAY_AGAIN)
@@ -43,6 +46,12 @@ public class GameConstants {
             .setTitle(HANG_MAN_GAME)
             .setHeader(YOU_ARE_ABOUT_TO_START_A_NEW_GAME)
             .setContent(ARE_YOU_SURE).build();
+
+    public static final Messages ERROR_STARTING_GAME = new Messages.MessagesBuilder()
+            .setTitle(HANG_MAN_GAME)
+            .setHeader(WE_SORRY_BUT_WE_CANT_START_THE_GAME)
+            .setContent(CONNECT_THE_DEVELOPER).build();
+
 
 }
 

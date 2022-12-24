@@ -1,6 +1,9 @@
 package com.example.demo;
 
 import com.example.demo.enums.ErrorNumber;
+import com.example.demo.exceptions.NoWordForTheGameException;
+
+import static com.example.demo.constants.GameConstants.ERROR_GETTING_QUESTION;
 
 public class HangManImpl {
     private int errorNumber;
@@ -15,14 +18,27 @@ public class HangManImpl {
 
     }
 
-    public void initNewWordForTheGame() {
-        this.wordForTheGame = dictionary.getWordForTheGame();
-        this.errorNumber = -1;
-        this.numberOfRightGuesses = wordForTheGame.length();
-        this.wordThatNeedToBeGuessedPattern = new String[numberOfRightGuesses];
-        this.wordForTheGameSplit = wordForTheGame.split("");
-        for (int i = 0; i < this.wordForTheGame.length(); i++) {
-            wordThatNeedToBeGuessedPattern[i] = " _ ";
+    public boolean initNewWordForTheGame() {
+        if(getFirstWord()) {
+            this.errorNumber = -1;
+            this.numberOfRightGuesses = wordForTheGame.length();
+            this.wordThatNeedToBeGuessedPattern = new String[numberOfRightGuesses];
+            this.wordForTheGameSplit = wordForTheGame.split("");
+            for (int i = 0; i < this.wordForTheGame.length(); i++) {
+                wordThatNeedToBeGuessedPattern[i] = " _ ";
+            }
+            return  true;
+        }
+        return false;
+    }
+
+    private boolean getFirstWord() {
+        try {
+            this.wordForTheGame = dictionary.getWordForTheGame();
+            return true;
+        } catch (NoWordForTheGameException e) {
+            System.out.println(ERROR_GETTING_QUESTION);
+            return false;
         }
     }
 

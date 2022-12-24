@@ -57,6 +57,7 @@ public class HangManController {
         informationMessagesAlert = new InformationMessagesAlert();
         drawPersonOnCanvs = new DrawPerson();
         Dictionary dictionary = new Dictionary();
+        dictionary.setWordLibrary();
         hangMan = new HangManImpl(dictionary);
         textOfTheWord.setFill(Color.BLACK);
         textOfTheWord.setStyle(FX_FONT_20_ARIAL);
@@ -68,10 +69,14 @@ public class HangManController {
 
     private void init() {
         gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-        hangMan.initNewWordForTheGame();
-        textOfTheWord.setText(hangMan.getWordThatNeedToBeGuessedPattern());
-        for (Button btn : btns) {
-            btn.setDisable(false);
+        if (hangMan.initNewWordForTheGame()) {
+            System.out.println(hangMan.getWordForTheGame());
+            textOfTheWord.setText(hangMan.getWordThatNeedToBeGuessedPattern());
+            for (Button btn : btns) {
+                btn.setDisable(false);
+            }
+        } else {
+            showErrorAndExit();
         }
     }
 
@@ -124,6 +129,11 @@ public class HangManController {
             informationMessagesAlert.getAlert(InformationCode.THANK_YOU_FOR_PLAYING, GOOD_BYE);
             exit();
         }
+    }
+
+    private void showErrorAndExit() {
+        informationMessagesAlert.getAlert(InformationCode.ERROR_STARTING_THE_GAME, ERROR_STARTING_GAME);
+        exit();
     }
 
 

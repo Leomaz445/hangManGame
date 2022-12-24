@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.exceptions.NoWordForTheGameException;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,14 +9,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static com.example.demo.constants.GameConstants.DIDNT_FIND_THE_FILE_TO_GET_THE_WORDS_FOR_THE_GAME;
-import static com.example.demo.constants.GameConstants.THEIR_WAS_AN_ERROR_TRYING_TO_READ_FROM_THE_FILE;
+import static com.example.demo.constants.GameConstants.*;
 
 public class Dictionary {
 
-    private final ArrayList<String> wordLibrary;
+    private ArrayList<String> wordLibrary;
 
     Dictionary() {
+        this.wordLibrary = new ArrayList<>();
+    }
+
+    public void setWordLibrary() {
         this.wordLibrary = getWordsFromAFile();
     }
 
@@ -38,9 +43,13 @@ public class Dictionary {
     }
 
 
-    public String getWordForTheGame() {
+    public String getWordForTheGame() throws NoWordForTheGameException {
         Random random = new Random();
-        int randomNumber = random.nextInt(this.wordLibrary.size());
-        return this.wordLibrary.get(randomNumber);
+        try {
+            int randomNumber = random.nextInt(this.wordLibrary.size());
+            return this.wordLibrary.get(randomNumber);
+        } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
+            throw new NoWordForTheGameException(ERROR_GETTING_QUESTION);
+        }
     }
 }

@@ -14,6 +14,7 @@ public class InformationMessagesAlert {
     private final HashMap<InformationCode, Consumer<Messages>> mapOfInformation = new HashMap<InformationCode, Consumer<Messages>>() {{
         put(InformationCode.YOU_WIN_OR_LOSE, msg -> createAlert(msg));
         put(InformationCode.THANK_YOU_FOR_PLAYING, msg -> createAlert(msg));
+        put(InformationCode.ERROR_STARTING_THE_GAME, msg -> createAlert(msg));
     }};
 
     public void getAlert(InformationCode alertCode, Messages messages) {
