@@ -2,15 +2,13 @@ package com.example.demo;
 
 import com.example.demo.enums.ErrorNumber;
 
-import java.util.Arrays;
-
 public class HangManImpl {
     private int errorNumber;
     private int numberOfRightGuesses;
     private String[] wordThatNeedToBeGuessedPattern;
     private String wordForTheGame;
     private String[] wordForTheGameSplit;
-    private Dictionary dictionary;
+    private final Dictionary dictionary;
 
     public HangManImpl(Dictionary dictionary) {
         this.dictionary = dictionary;
@@ -39,7 +37,11 @@ public class HangManImpl {
 
 
     public String getWordThatNeedToBeGuessedPattern() {
-        return Arrays.toString(wordThatNeedToBeGuessedPattern);
+        StringBuilder str = new StringBuilder();
+        for (String s : wordThatNeedToBeGuessedPattern) {
+            str.append(s);
+        }
+        return str.toString();
     }
 
 
