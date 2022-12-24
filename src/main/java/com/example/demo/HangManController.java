@@ -70,7 +70,6 @@ public class HangManController {
     private void init() {
         gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
         if (hangMan.initNewWordForTheGame()) {
-            System.out.println(hangMan.getWordForTheGame());
             textOfTheWord.setText(hangMan.getWordThatNeedToBeGuessedPattern());
             for (Button btn : btns) {
                 btn.setDisable(false);
